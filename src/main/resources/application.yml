@@ -1,0 +1,57 @@
+spring:
+  application:
+    name: eurekaCluster
+
+---
+
+spring:
+  profiles: 8081
+server:
+  port: 8081
+logging:
+  config: classpath:logback-eureka1.xml
+eureka:
+  instance:
+    hostname: eureka1
+#    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eureka2:8082/eureka/,http://eureka3:8083/eureka/
+
+---
+
+spring:
+  profiles: 8082
+server:
+  port: 8082
+logging:
+  config: classpath:logback-eureka2.xml
+eureka:
+  instance:
+    hostname: eureka2
+#    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eureka1:8081/eureka/,http://eureka3:8083/eureka/
+
+---
+spring:
+  profiles: 8083
+server:
+  port: 8083
+logging:
+  config: classpath:logback-eureka3.xml
+eureka:
+  instance:
+    hostname: eureka3
+#    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eureka1:8081/eureka/,http://eureka2:8082/eureka/
+
