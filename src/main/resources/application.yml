@@ -3,21 +3,26 @@ spring:
     name: eurekaCluster
 
 ---
-
+#多环境配置,spring.profiles.active=8081时会激活下列配置
+#便于一个jar包运行多个不同配置的实例
 spring:
   profiles: 8081
 server:
   port: 8081
 logging:
+#日志写入规则配置
   config: classpath:logback-eureka1.xml
 eureka:
   instance:
+    #正常eureka会自动拉取设备host，但各节点在同一机器下时请务必添加，注意各节点配置自己节点的host
     hostname: eureka1
 #    preferIpAddress: true
   client:
-    registerWithEureka: true
-    fetchRegistry: true
+    registerWithEureka: false #不注册自身的eureka实例
+    fetchRegistry: false #只维护服务实例,不需要检索服务.
     serviceUrl:
+      #高可用节点,互相备份实例信息
+      #地址不能使用localhost，要使用域名，DNS解析自行在/etc/hosts文件中配置。
       defaultZone: http://eureka2:8082/eureka/,http://eureka3:8083/eureka/
 
 ---

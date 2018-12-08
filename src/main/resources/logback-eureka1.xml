@@ -15,12 +15,7 @@
         <file>/var/log/tshirt/tshirt.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!-- rollover daily -->
-            public String email;
-            public String telephone;
-            public String mobile1;
-            public String mobile2;
-            public String officeTelephone;
-            public String faxNumber;  <fileNamePattern>/var/log/ecreditpal/eureka1/eureka.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>/var/log/ecreditpal/eureka1/eureka.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <!-- each file should be at most 100MB, keep 60 days worth of history, but at most 20GB -->
             <maxFileSize>20MB</maxFileSize>
             <maxHistory>14</maxHistory>
@@ -35,7 +30,6 @@
         <!--<appender-ref ref="rollingFileAppender"/>-->
         <appender-ref ref="STDOUT"/>
     </root>
-
 
 
     <!--<logger name="thirst-log" additivity="false">-->
