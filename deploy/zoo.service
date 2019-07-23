@@ -1,0 +1,12 @@
+[Unit]
+Description=zoo Service
+After=network.target
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/sysconfig/zoo-port.sysconfig
+ExecStart=/usr/bin/java $CONFIG $JVM_OPTS $JMX_OPTS -jar $JAR
+ExecStartPost=/bin/sh -c "echo $MAINPID > /var/log/zoo/zoo-port.pid"
+
+[Install]
+WantedBy=multi-user.target

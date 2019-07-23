@@ -18,8 +18,9 @@ eureka:
     hostname: eureka1
 #    preferIpAddress: true
   client:
-    registerWithEureka: false #不注册自身的eureka实例
-    fetchRegistry: false #只维护服务实例,不需要检索服务.
+    #registerWithEureka: false #不注册自身的eureka实例
+    #fetchRegistry: false #只维护服务实例,不需要检索服务.
+    eureka-connection-idle-timeout-seconds: 0
     serviceUrl:
       #高可用节点,互相备份实例信息
       #地址不能使用localhost，要使用域名，DNS解析自行在/etc/hosts文件中配置。
@@ -38,8 +39,9 @@ eureka:
     hostname: eureka2
 #    preferIpAddress: true
   client:
-    registerWithEureka: true
-    fetchRegistry: true
+    #registerWithEureka: true
+    #fetchRegistry: true
+    eureka-connection-idle-timeout-seconds: 0
     serviceUrl:
       defaultZone: http://eureka1:8081/eureka/,http://eureka3:8083/eureka/
 
@@ -55,8 +57,9 @@ eureka:
     hostname: eureka3
 #    preferIpAddress: true
   client:
-    registerWithEureka: true
-    fetchRegistry: true
+    #registerWithEureka: true
+    #fetchRegistry: true
+    eureka-connection-idle-timeout-seconds: 0
     serviceUrl:
       defaultZone: http://eureka1:8081/eureka/,http://eureka2:8082/eureka/
 

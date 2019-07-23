@@ -12,10 +12,10 @@
 
     <appender name="rollingFileAppender"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>/var/log/tshirt/tshirt.log</file>
+        <file>/var/log/zoo/8081/eureka.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!-- rollover daily -->
-            <fileNamePattern>/var/log/ecreditpal/eureka1/eureka.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>/var/log/zoo/8081/eureka.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <!-- each file should be at most 100MB, keep 60 days worth of history, but at most 20GB -->
             <maxFileSize>20MB</maxFileSize>
             <maxHistory>14</maxHistory>
@@ -27,8 +27,8 @@
 
     <root>
         <level value="info"/>
-        <!--<appender-ref ref="rollingFileAppender"/>-->
-        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="rollingFileAppender"/>
+        <!--<appender-ref ref="STDOUT"/>-->
     </root>
 
 

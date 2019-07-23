@@ -1,0 +1,54 @@
+- hosts: "{{target}}"
+  serial: 1
+  become: yes
+  tasks:
+  - name: Ansible create directory
+    file:
+      path: /var/log/zoo
+      state: directory
+  - name: Copy {{ pkg }} to {{ ansible_default_ipv4.address }}
+    synchronize:
+      src: "{{ pkg }}"
+      dest: /opt/
+      recursive: yes
+      delete: yes
+      links: yes
+      owner: no
+      group: no
+      perms: yes
+
+  - name: Copy service to {{ ansible_default_ipv4.address }}
+    copy:
+      src: zoo.service
+      dest: /usr/lib/systemd/system/zoo-{{ port }}.service
+      owner: "{{ ansible_user }}"
+      group: "{{ ansible_user }}"
+      mode: 0770
+
+  - name: replce service
+    replace:
+      dest: /usr/lib/systemd/system/zoo-{{ port }}.service
+      regexp: 'zoo-port'
+      replace: 'zoo-{{ port }}'
+
+  - name: Copy service config to {{ ansible_default_ipv4.address }}
+    copy:
+      src: zoo.sysconfig
+      dest: /etc/sysconfig/zoo-{{ port }}.sysconfig
+      owner: "{{ ansible_user }}"
+      group: "{{ ansible_user }}"
+      mode: 0770
+
+  - name: replace config
+    replace:
+      dest: /etc/sysconfig/zoo-{{ port }}.sysconfig
+      regexp: '-Dspring.profiles.active=test'
+      replace: '-Dspring.profiles.active={{ port }}'
+
+  - name: reload config
+    shell: systemctl daemon-reload
+
+  - name: restart service
+    shell: systemctl restart zoo-{{ port }}
+
+

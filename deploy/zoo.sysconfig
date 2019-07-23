@@ -1,0 +1,11 @@
+JAR="/opt/eureka.jar"
+
+CONFIG="-Dspring.profiles.active=test -Duser.timezone=GMT+8"
+
+JMX_OPTS="-server "
+#JMX_OPTS="-server -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9001 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
+
+JAVA_HOME=/usr/bin/java
+
+# Ansible will modify JVM_OPTS !!
+JVM_OPTS="-Xms256m -Xmx256m"

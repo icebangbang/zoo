@@ -1,0 +1,33 @@
+# 相同ip情况下，取别名不会重复
+[8081]
+group-1 ansible_ssh_host=47.98.129.81
+
+
+[8081:vars]
+ansible_user=jenkins_sre
+ansible_port=22
+port=8081
+
+
+[8082]
+group-2 ansible_ssh_host=47.98.129.81
+
+
+[8082:vars]
+ansible_user=jenkins_sre
+ansible_port=22
+port=8082
+
+[8083]
+group-3 ansible_ssh_host=47.98.129.81
+
+
+[8083:vars]
+ansible_user=jenkins_sre
+ansible_port=22
+port=8083
+
+[hz:children]
+8081
+8082
+8083
